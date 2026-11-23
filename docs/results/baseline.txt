@@ -1,0 +1,118 @@
+              benchmark              
+-------------------------------------
+ BEFORE INDEX: QUERY A / Nissan 350Z
+(1 row)
+
+ count 
+-------
+  1092
+(1 row)
+
+                                                                                   QUERY PLAN                                                                                    
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3366.76..3366.83 rows=30 width=34) (actual time=23.005..23.010 rows=30 loops=1)
+   Buffers: shared hit=1115
+   ->  Sort  (cost=3366.76..3367.16 rows=161 width=34) (actual time=23.000..23.002 rows=30 loops=1)
+         Sort Key: price
+         Sort Method: top-N heapsort  Memory: 28kB
+         Buffers: shared hit=1115
+         ->  Seq Scan on vehicles  (cost=0.00..3362.00 rows=161 width=34) (actual time=0.029..22.566 rows=1092 loops=1)
+               Filter: ((price >= '6500'::numeric) AND (price <= '18000'::numeric) AND (make = 'Nissan'::text) AND (model = '350Z'::text) AND (listing_status = 'active'::text))
+               Rows Removed by Filter: 98908
+               Buffers: shared hit=1112
+ Planning:
+   Buffers: shared hit=24
+ Planning Time: 0.243 ms
+ Execution Time: 23.050 ms
+(14 rows)
+
+                                                                                   QUERY PLAN                                                                                    
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3366.76..3366.83 rows=30 width=34) (actual time=21.918..21.922 rows=30 loops=1)
+   Buffers: shared hit=1112
+   ->  Sort  (cost=3366.76..3367.16 rows=161 width=34) (actual time=21.915..21.917 rows=30 loops=1)
+         Sort Key: price
+         Sort Method: top-N heapsort  Memory: 28kB
+         Buffers: shared hit=1112
+         ->  Seq Scan on vehicles  (cost=0.00..3362.00 rows=161 width=34) (actual time=0.031..21.529 rows=1092 loops=1)
+               Filter: ((price >= '6500'::numeric) AND (price <= '18000'::numeric) AND (make = 'Nissan'::text) AND (model = '350Z'::text) AND (listing_status = 'active'::text))
+               Rows Removed by Filter: 98908
+               Buffers: shared hit=1112
+ Planning Time: 0.186 ms
+ Execution Time: 21.944 ms
+(12 rows)
+
+                                                                                   QUERY PLAN                                                                                    
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3366.76..3366.83 rows=30 width=34) (actual time=21.709..21.715 rows=30 loops=1)
+   Buffers: shared hit=1112
+   ->  Sort  (cost=3366.76..3367.16 rows=161 width=34) (actual time=21.706..21.709 rows=30 loops=1)
+         Sort Key: price
+         Sort Method: top-N heapsort  Memory: 28kB
+         Buffers: shared hit=1112
+         ->  Seq Scan on vehicles  (cost=0.00..3362.00 rows=161 width=34) (actual time=0.038..21.325 rows=1092 loops=1)
+               Filter: ((price >= '6500'::numeric) AND (price <= '18000'::numeric) AND (make = 'Nissan'::text) AND (model = '350Z'::text) AND (listing_status = 'active'::text))
+               Rows Removed by Filter: 98908
+               Buffers: shared hit=1112
+ Planning Time: 0.158 ms
+ Execution Time: 21.746 ms
+(12 rows)
+
+                       benchmark                       
+-------------------------------------------------------
+ BEFORE INDEX: QUERY B / newer low-mileage Honda Civic
+(1 row)
+
+ count 
+-------
+   161
+(1 row)
+
+                                                                            QUERY PLAN                                                                            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3362.43..3362.48 rows=20 width=34) (actual time=17.645..17.652 rows=40 loops=1)
+   Buffers: shared hit=1112
+   ->  Sort  (cost=3362.43..3362.48 rows=20 width=34) (actual time=17.642..17.645 rows=40 loops=1)
+         Sort Key: price
+         Sort Method: top-N heapsort  Memory: 29kB
+         Buffers: shared hit=1112
+         ->  Seq Scan on vehicles  (cost=0.00..3362.00 rows=20 width=34) (actual time=0.684..17.487 rows=161 loops=1)
+               Filter: ((model_year >= 2019) AND (mileage <= 70000) AND (make = 'Honda'::text) AND (model = 'Civic'::text) AND (listing_status = 'active'::text))
+               Rows Removed by Filter: 99839
+               Buffers: shared hit=1112
+ Planning Time: 0.229 ms
+ Execution Time: 17.692 ms
+(12 rows)
+
+                                                                            QUERY PLAN                                                                            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3362.43..3362.48 rows=20 width=34) (actual time=15.397..15.410 rows=40 loops=1)
+   Buffers: shared hit=1112
+   ->  Sort  (cost=3362.43..3362.48 rows=20 width=34) (actual time=15.393..15.399 rows=40 loops=1)
+         Sort Key: price
+         Sort Method: top-N heapsort  Memory: 29kB
+         Buffers: shared hit=1112
+         ->  Seq Scan on vehicles  (cost=0.00..3362.00 rows=20 width=34) (actual time=1.095..15.199 rows=161 loops=1)
+               Filter: ((model_year >= 2019) AND (mileage <= 70000) AND (make = 'Honda'::text) AND (model = 'Civic'::text) AND (listing_status = 'active'::text))
+               Rows Removed by Filter: 99839
+               Buffers: shared hit=1112
+ Planning Time: 0.206 ms
+ Execution Time: 15.453 ms
+(12 rows)
+
+                                                                            QUERY PLAN                                                                            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3362.43..3362.48 rows=20 width=34) (actual time=9.336..9.341 rows=40 loops=1)
+   Buffers: shared hit=1112
+   ->  Sort  (cost=3362.43..3362.48 rows=20 width=34) (actual time=9.334..9.336 rows=40 loops=1)
+         Sort Key: price
+         Sort Method: top-N heapsort  Memory: 29kB
+         Buffers: shared hit=1112
+         ->  Seq Scan on vehicles  (cost=0.00..3362.00 rows=20 width=34) (actual time=0.246..9.193 rows=161 loops=1)
+               Filter: ((model_year >= 2019) AND (mileage <= 70000) AND (make = 'Honda'::text) AND (model = 'Civic'::text) AND (listing_status = 'active'::text))
+               Rows Removed by Filter: 99839
+               Buffers: shared hit=1112
+ Planning Time: 0.141 ms
+ Execution Time: 9.369 ms
+(12 rows)
+

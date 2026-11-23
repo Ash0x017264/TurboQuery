@@ -1,0 +1,8 @@
+# Locally generated data and results
+sample_data/*.csv
+backups/
+.env
+*.log
+__pycache__/
+*.pyc
+# Keep reviewed benchmark evidence and screenshots in docs/results/
